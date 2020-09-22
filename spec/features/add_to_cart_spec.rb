@@ -18,18 +18,18 @@ RSpec.feature "Visitor navigates to home and open the details of a product", typ
     
   end
 
-  scenario "They see the product's details" do
+  scenario "Adding an item to cart increases the 'My Cart' quantity" do
     # ACT
     visit root_path
 
-    find("a.test-capybara-details", match: :first).click
+    find('.test-capybara-add', match: :first).click
 
-    find('.products-show')
+    find('a', text: 'My Cart (1)')
     puts page.html
     # DEBUG / VERIFY
     save_screenshot
 
-    expect(page).to have_css 'section.products-show'
+    expect(page).to have_text 'My Cart (1)'
   end
 
 end
